@@ -4,20 +4,12 @@
 package com.app.instruction.main;
 
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.app.instruction.panel.InstructionPanel;
 import com.app.instruction.panel.exception.InstructionException;
@@ -34,26 +26,20 @@ public class TestInstructionComponent extends JFrame {
 	private InstructionPanel panel;
 
 	//Instruction Panel
-	
-	private JCheckBox doWeNeedFrame;
-	private JCheckBox doWeNeedFingers;
-	private JTextField attrTxt;
-	private JButton loadAbacus;
-	private JButton showAbacus;
 
 	public TestInstructionComponent() {
 		try {
 			this.getContentPane().setLayout(null);
 			this.setResizable(false);
 			this.setTitle("Abacus. Lets start learning mind math !!!");
-			this.setBounds(100, 100, 1050, 690);
+			this.setBounds(100, 100, 1250, 650);
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setBackground(Color.WHITE);
 
 			/* Create Instruction Panel */
 			
 			panel = new InstructionPanel();
-			panel.setBounds(10, 50, this.getWidth() - 20, this.getHeight() - 180);
+			panel.setBounds(10, 20, this.getWidth() - 20, this.getHeight() - 180);
 		
 
 

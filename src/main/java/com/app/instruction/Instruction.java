@@ -92,23 +92,32 @@ public class Instruction extends AbstractInstruction {
 	}
 
 	/**
-	 * Method is responsible to draw Abacus
+	 * Method is responsible to draw
 	 */
 	public void drawAbacus(Graphics g) {
 		// Draw Frame
 		if (canWeDisplayFrame())
 			frame.drawFrame(g);
 
-		// Draw Rod
+		// Draw tutor
 		for (Tutor rod : tutor) {
 			rod.drawRod(g);
 		}
 
-		// Drww Rods
+		// Draw student
 		for (int i = 0; i < numOftutors; i++) {
 
 			student[i].drawStudent(g);
 		}
+		// Draw SpeechBoxTutor
+		for (int i = 0; i < numOftutors; i++) {
+			speechboxtutor[i].drawSpeech(g);
+		}
+		// Draw SpeechBoxStudent
+		for (int i = 0; i < numOftutors; i++) {
+			speechBoxStudents[i].drawSpeech(g);
+		}
+				
 	}
 
 	/**
@@ -151,6 +160,8 @@ public class Instruction extends AbstractInstruction {
 			initializeFrame(attributes);
 			initializeRods(attributes);
 			initializeStudents(attributes);
+			initializeSpeechBoxTutor(attributes);
+			initializeSpeechBoxStudent(attributes);
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw (new InstructionException("Unable to initialize Abacus..."));
@@ -207,10 +218,10 @@ public class Instruction extends AbstractInstruction {
 		for (int i = 0; i < numOftutors; i++) {
 			tutor[i] = new Tutor();
 			tutor[i].setImage(rodImagePath);
-			tutor[i].setPosX(frame.getFrameVerticalWidth());
-			tutor[i].setPosY(100);
+			tutor[i].setPosX(frame.getFrameVerticalWidth()+20);
+			tutor[i].setPosY(140);
 			tutor[i].setWidth(300);
-			tutor[i].setHeight(400);
+			tutor[i].setHeight(300);
 			tutor[i].setDoWeNeedToDisplayRodNumbers(doWeNeedToDisplayRodNumbers.booleanValue());
 			tutor[i].setRodWidth(rodWidth.intValue());
 		}
@@ -239,14 +250,81 @@ public class Instruction extends AbstractInstruction {
 		for (int i = 0; i < numOftutors; i++) {
 			student[i] = new Student();
 			student[i].setImage(studentImagePath);
-			student[i].setPosX(frame.getFrameVerticalWidth() + 700);
-			student[i].setPosY(200);
-			student[i].setWidth(300);
-			student[i].setHeight(300);
+			student[i].setPosX(frame.getFrameVerticalWidth() + 920);
+			student[i].setPosY(230);
+			student[i].setWidth(270);
+			student[i].setHeight(200);
 			student[i].setDoWeNeedToDisplayRodNumbers(doWeNeedToDisplayRodNumbers.booleanValue());
 			student[i].setRodWidth(rodWidth.intValue());
 		}
 	}
+	
+	/**
+	 * Method is responsible to initialize SpeechBoxTutor
+	 */
+
+	private void initializeSpeechBoxTutor(Map<String, String> attributes) throws IOException {
+		Image speechBoxTutorImagePath = getImage(attributes.get("speechBoxTutorImagePath"));
+		Boolean doWeNeedToDisplayRodNumbers = isTrueOrFalse(attributes, "doWeNeedToDisplayRodNumbers");
+		Integer rodWidth = attributes.get("rodWidth") != null ? Integer.valueOf(attributes.get("rodWidth"))
+				: Instruction.DEFAULT_ROD_WIDTH;
+
+		/* Draw BOX */
+		int minusFrameWidth = frame.getFrameVerticalWidth();
+		if (!canWeDisplayFrame()) {
+			minusFrameWidth = 0;
+		}
+		int rodSpace = (panel.getWidth() - minusFrameWidth) / (getNumOfRods() + 1);
+		getLogger().logDebug(
+				"initializeRods Total Width ==> " + panel.getWidth() + " :: Caclulated Rod Space ==> " + rodSpace);
+
+		speechboxtutor = new SpeechBoxTutor[numOftutors];
+		for (int i = 0; i < numOftutors; i++) {
+			speechboxtutor[i] = new SpeechBoxTutor();
+			speechboxtutor[i].setImage(speechBoxTutorImagePath);
+			speechboxtutor[i].setPosX(frame.getFrameVerticalWidth() + 200);
+			speechboxtutor[i].setPosY(300);
+			speechboxtutor[i].setWidth(700);
+			speechboxtutor[i].setHeight(100);
+			speechboxtutor[i].setDoWeNeedToDisplayRodNumbers(doWeNeedToDisplayRodNumbers.booleanValue());
+			speechboxtutor[i].setRodWidth(rodWidth.intValue());
+		}
+	}
+	
+	/**
+	 * Method is responsible to initialize SpeechBoxStudent
+	 */
+
+	private void initializeSpeechBoxStudent(Map<String, String> attributes) throws IOException {
+		Image speechBoxStudentImagePath = getImage(attributes.get("speechBoxStudentImagePath"));
+		Boolean doWeNeedToDisplayRodNumbers = isTrueOrFalse(attributes, "doWeNeedToDisplayRodNumbers");
+		Integer rodWidth = attributes.get("rodWidth") != null ? Integer.valueOf(attributes.get("rodWidth"))
+				: Instruction.DEFAULT_ROD_WIDTH;
+
+		/* Draw BOX */
+		int minusFrameWidth = frame.getFrameVerticalWidth();
+		if (!canWeDisplayFrame()) {
+			minusFrameWidth = 0;
+		}
+		int rodSpace = (panel.getWidth() - minusFrameWidth) / (getNumOfRods() + 1);
+		getLogger().logDebug(
+				"initializeRods Total Width ==> " + panel.getWidth() + " :: Caclulated Rod Space ==> " + rodSpace);
+
+		speechBoxStudents = new SpeechBoxStudent[numOftutors];
+		for (int i = 0; i < numOftutors; i++) {
+			speechBoxStudents[i] = new SpeechBoxStudent();
+			speechBoxStudents[i].setImage(speechBoxStudentImagePath);
+			speechBoxStudents[i].setPosX(frame.getFrameVerticalWidth() + 320);
+			speechBoxStudents[i].setPosY(200);
+			speechBoxStudents[i].setWidth(600);
+			speechBoxStudents[i].setHeight(100);
+			speechBoxStudents[i].setDoWeNeedToDisplayRodNumbers(doWeNeedToDisplayRodNumbers.booleanValue());
+			speechBoxStudents[i].setRodWidth(rodWidth.intValue());
+		}
+	}
+	
+	
+	
 
 	/**
 	 * Method is responsible to create the image

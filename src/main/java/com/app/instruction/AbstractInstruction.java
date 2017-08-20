@@ -18,6 +18,8 @@ public abstract class AbstractInstruction {
 	protected InstructionLogger logger;
 	protected Tutor[] tutor;
 	protected Student[] student;
+	protected SpeechBoxTutor[] speechboxtutor;
+	protected SpeechBoxStudent[] speechBoxStudents;
 	protected Frame frame;
 
 		

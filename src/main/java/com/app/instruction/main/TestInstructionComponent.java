@@ -32,7 +32,7 @@ public class TestInstructionComponent extends JFrame {
 			this.getContentPane().setLayout(null);
 			this.setResizable(false);
 			this.setTitle("Abacus. Lets start learning mind math !!!");
-			this.setBounds(100, 100, 1250, 650);
+			this.setBounds(10, 10, 1250, 650);
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setBackground(Color.WHITE);
 

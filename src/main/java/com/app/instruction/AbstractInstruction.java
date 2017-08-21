@@ -20,6 +20,7 @@ public abstract class AbstractInstruction {
 	protected Student[] student;
 	protected SpeechBoxTutor[] speechboxtutor;
 	protected SpeechBoxStudent[] speechBoxStudents;
+	protected ThinkBoxStudent[] thinkBoxStudents;
 	protected Frame frame;
 
 		
